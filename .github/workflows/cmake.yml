@@ -1,0 +1,16 @@
+name: CMake CI
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies (Windows)
+        run: C:\vcpkg\vcpkg.exe install --triplet x64-windows sdl2-image
+      - name: Configure CMake (Windows)
+        run: cmake -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows .
